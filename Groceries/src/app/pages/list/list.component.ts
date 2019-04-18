@@ -13,15 +13,20 @@ export class ListComponent implements OnInit {
 
     public groceryList: Grocery[] = [];
     public grocery: string = '';
+    public isLoading: boolean = false;
+    public listLoaded: boolean = false;
     @ViewChild('groceryTextField') groceryTextField: ElementRef;
 
     constructor(private groceryListService: GroceryListService) { };
 
     ngOnInit(): void {
+        this.isLoading = true;
         this.groceryListService.load()
             .subscribe(groceries => {
                 groceries.forEach(grocery => this.groceryList.push(grocery));
             });
+        this.isLoading = false;
+        this.listLoaded = true;
     }
 
     public add() {
