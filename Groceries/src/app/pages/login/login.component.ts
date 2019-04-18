@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
         private page: Page
     ) {
         this.user = new User();
-        this.user.email = 'v.v@v.v';
+        this.user.email = 'igor.buljan@altima.hr';
         this.user.password = 'pass';
     }
 
@@ -32,6 +32,11 @@ export class LoginComponent implements OnInit {
     }
 
     public submit() {
+        if (!this.user.isValidEmail()) {
+            alert('Enter a valid email address.');
+            return;
+        }
+
         if (this.isLoggingIn) {
             this.login();
         } else {
