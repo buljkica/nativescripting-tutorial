@@ -38,6 +38,16 @@ export class GroceryListService {
                 catchError(this.handleErrors));
     }
 
+    public delete(grocery: Grocery) {
+        return this.http.delete(this.baseUrl + "/" + grocery.id, { headers: this.getCommonHeaders() })
+            .pipe(
+                map(data => {
+                    return data;
+                }),
+                catchError(this.handleErrors)
+            );
+    }
+
     private getCommonHeaders() {
         return new HttpHeaders({
             "Content-Type": "application/json",

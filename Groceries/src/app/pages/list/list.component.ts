@@ -57,6 +57,26 @@ export class ListComponent implements OnInit {
             );
     }
 
+    public delete(groceryToRemove: Grocery) {
+        if (!groceryToRemove) {
+            alert('Specify grocery to delete.');
+            return;
+        }
+
+        this.groceryListService.delete(groceryToRemove)
+            .subscribe(
+                removedGroceryResult => {
+                    this.groceryList = this.groceryList.filter(grocery => !(grocery.id === groceryToRemove.id));
+                },
+                () => {
+                    alert({
+                        message: 'And error occurred while removing an item to your list.',
+                        okButtonText: 'OK'
+                    });
+                }
+            );
+    }
+
     public share() {
         const list = [];
         for (let i = 0, size = this.groceryList.length; i < size; i++) {

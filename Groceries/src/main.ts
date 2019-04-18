@@ -2,6 +2,7 @@ import { platformNativeScriptDynamic } from "nativescript-angular/platform";
 import { AppModule } from "./app/app.module";
 import { on as applicationOn, launchEvent, suspendEvent, resumeEvent, exitEvent, lowMemoryEvent, uncaughtErrorEvent, ApplicationEventData } from "tns-core-modules/application";
 import { android, AndroidApplication, AndroidActivityBundleEventData, AndroidActivityEventData, AndroidActivityResultEventData, AndroidActivityBackPressedEventData } from "tns-core-modules/application";
+import { setStatusBarColors } from "./app/utils/status-bar-util";
 
 applicationOn(launchEvent, (args: ApplicationEventData) => {
     if (args.android) {
@@ -104,4 +105,5 @@ if (android) {
     });
 }
 
+setStatusBarColors();
 platformNativeScriptDynamic().bootstrapModule(AppModule);
