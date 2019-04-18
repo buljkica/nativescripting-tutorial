@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Grocery } from '~/app/shared/grocery/grocery';
 import { GroceryListService } from '~/app/shared/grocery/grocery-list.service';
 import { TextField } from "tns-core-modules/ui/text-field";
+import * as SocialShare from "nativescript-social-share";
+import { backgroundSizeProperty } from 'tns-core-modules/ui/page/page';
 
 @Component({
     selector: 'list',
@@ -53,5 +55,15 @@ export class ListComponent implements OnInit {
                     this.grocery = '';
                 }
             );
+    }
+
+    public share() {
+        const list = [];
+        for (let i = 0, size = this.groceryList.length; i < size; i++) {
+            list.push(this.groceryList[i].name)
+        }
+
+        const listSharing = list.join(', ').trim();
+        SocialShare.shareText(listSharing);
     }
 }
